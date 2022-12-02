@@ -66,3 +66,20 @@ def tuple_for_next_data() -> tuple:
             yield data, *df.loc[i]["Exchange rate"].values
     raise FileNotFoundError
 
+if __name__ == "__main__":
+    try:
+        file = "C:/Users/esh20/Desktop/dataset.csv"
+        file_x = "C:/Users/esh20/PycharmProjects/Lab2/1/X.csv"
+        file_y = "C:/Users/esh20/PycharmProjects/Lab2/1/Y.csv"
+        directory_for_weeks = "C:/Users/esh20/PycharmProjects/Lab2/3/"
+        directory_for_years = "C:/Users/esh20/PycharmProjects/Lab2/2/"
+
+        existing_date = datetime.date(2022, 9, 15)
+        nonexistent_date = datetime.date(1991, 5, 12)
+
+    it = tuple_for_next_data()
+    while True:
+        print(next(it))
+
+except FileNotFoundError:
+print("No such file exists!")
