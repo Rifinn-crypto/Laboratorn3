@@ -15,6 +15,7 @@ def formatted_file(input_file: str) -> pd.DataFrame:
 
 
 def get_data(input_file: str, date: datetime.date) -> Union[numpy.float64, None]:
+
     if os.path.exists(input_file):
         df = formatted_file(input_file)
         for i in range(0, df.shape[0], 1):
