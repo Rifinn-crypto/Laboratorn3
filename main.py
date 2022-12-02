@@ -42,3 +42,27 @@ def get_data_xy(input_file_x: str, input_file_y: str,
         return None
 
     raise FileNotFoundError
+
+def get_data_from_week_and_years(input_directory: str, date: datetime.date) -> Union[numpy.float64, None]:
+    if os.path.exists(input_directory):
+        for root, dirs, files in os.walk(input_directory):
+            for filename in files[0: -1:]:
+                df = pd.read_csv(os.path.join(root, filename))
+
+                for i in range(0, df.shape[0], 1):
+                    if df["Day"].iloc[i].replace("-", "") == str(date).replace("-", ""):
+                        return df.iloc[i]["Exchange rate"]
+
+            return None
+    raise FileNotFoundError
+
+
+def tuple_for_next_data() -> tuple:
+    input_file = "C:/Users/esh20/Desktop/dataset.csv"
+    if os.path.exists(input_file):
+        df = pd.read_csv(input_file)
+        for data in df["Day"]:
+            i = df.index[df["Day"] == data]
+            yield data, *df.loc[i]["Exchange rate"].values
+    raise FileNotFoundError
+
